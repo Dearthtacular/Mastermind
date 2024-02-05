@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,34 @@
     <script defer src="js/app.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <h1>Title</h1>
-    <div>Board Container
-        <div>game board broken into various squares/columns/areas using grid/flexbox with a resolution of 48x20 squares</div>
-    </div>
-        <button>End turn/guess</button>
-        <button>reset</button>
-    
+    <section id="boardContainer">
+        <section class ="row" id="row1">
+            <!-- game board broken into various squares/columns/areas using grid/flexbox with a resolution of 48x20 squares -->
+            <div class="column" id="column0"><!-- create a single div that replicates each turn -->
+                <div class="reports" id="top-left"></div>
+                <div class="reports" id="top-right"></div>
+                <div class="reports" id="bottom-right"></div>
+                <div class="reports" id="bottom-left"></div>
+            </div>
+            <div class="column" id="playerColumnr1c1"></div> <!-- create a single div that replicates each turn -->
+            <div class="column" id="playerColumnr1c2"></div> <!-- create a single div that replicates each turn -->
+            <div class="column" id="playerColumnr1c3"></div> <!-- create a single div that replicates each turn -->
+            <div class="column" id="playerColumnr1c4"></div> <!-- create a single div that replicates each turn -->
+        </section>
+        <section class ="row" id="codeRow">
+            <!-- game board broken into various squares/columns/areas using grid/flexbox with a resolution of 48x20 squares -->
+            <div class="column">EMPTY</div>
+            <div class="column" id="computerColumn1"></div> 
+            <div class="column" id="computerColumn2"></div>
+            <div class="column" id="computerColumn3"></div> 
+            <div class="column" id="computerColumn4"></div> 
+        </section>
+    </section>
+    <button>End turn/guess</button>
+    <button>reset</button>
 </body>
+
 </html>

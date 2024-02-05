@@ -1,88 +1,75 @@
-console.log('success')
-
-
------ constants --------------------------------------------------------------
+/*----- constants -----*/
 
 const pegColors = ['clear', 'red', 'white', 'blue', 'green', 'yellow', 'black'] 
-//  This can be used for peg color choices (or lack thereof) for both the player and computer.
 
-const playerGuessHistory = {
-    1: ['r', 'g', 'b', 'y', 'lock'],
-    2: ['b', 'k', 'w', 'g'],
-    etc...
-} // Stores all player guesses for each round after player clicks "end turn" button.  New array is created every turn.  Position of each array element (placed player peg) is fixed relative to selections made.  
+const boardRow = {}
 
-const responseHistory = {     
-    1: ['r', 'w', 'r', 'c'],
-    2: ['w', 'c', 'c', 'c'],
-    etc...
-} // Stores all computer responses for each round once player clicks "end turn" button and before the next turn begins.  New array is created every turn.  Position of placed pegs is random.  Computer can select either clear, red, or white
+// const playerGuessHistory = {
+//     1: ['r', 'g', 'b', 'y', 'lock'],
+//     2: ['b', 'k', 'w', 'g'],
+//     etc...
+// }
 
------ app's state (variables) ------------------------------------------
+const responseHistory = {}
 
-let turn = //Will determine current player row / prohibits changing guesses from prior turns / will end game if > 10
+// const responseHistory = {     
+//     1: ['r', 'w', 'r', 'c'],
+//     2: ['w', 'c', 'c', 'c'],
+//     etc...
+// }
 
-let currentGuess = // An array that is created each turn to record each individual peg placement'
+let currentGuessRow = [] // An array that is created each turn to record each individual peg placement'
 
-let win = // 0 or 1 - triggers win status
+let computerCode = [] // where the computer creates the code to be guessed upon initialization
 
------ cached element references (DOM) ----------------------------------
 
-Game board
-End turn button
-Reset button
+/*----- app's state (variables) -----*/
 
------ event listeners --------------------------------------------------
+let turn = 1 //Will determine current player row / prohibits changing guesses from prior turns / will end game if > 10
 
-document.querySelector('div')
-    .addEventListener('click', handleBoardPeg) 
+let win = '' // null on initialize 0 or 1 - triggers win status
 
-document.querySelector('div')
-    .addEventListener('click', handlePegColor) 
+/*----- cached element references -----*/
+let computerColumn1El = document.querySelector('#computerColumn1');
+let computerColumn2El = document.querySelector('#computerColumn2');
+let computerColumn3El = document.querySelector('#computerColumn3');
+let computerColumn4El = document.querySelector('#computerColumn4');
+let playerColumnr1c1El = document.querySelector('#playerColumnr1c1');
 
-document.querySelector('button')
-    .addEventListener('click', handleButton) // Returns a button press function relative to the id of the button pressed
+/*----- event listeners -----*/
+document.querySelector('#playerColumnr1c1').addEventListener('click', handlePick)
 
-document.querySelector('button')
-    .addEventListener('click', handleReset) // 
 
 /*----- functions -----*/
 
-handleBoardPeg (function) {
-    prohibit clicking anywhere that isn't an active player peg area
-    Opens submenu for player to pick peg color for placement in selected grid area.  
+initialize()
+
+function initialize() {
+    boardRow[turn] = // currentGuessRow
+    currentGuessRow = [null, null, null, null]
+    computerCode = [null, null, null, null] 
+    win = 0
+    render()
+    //clear win or loss message
+}
+//console.log(playerGuessHistory)
+function render() {
+    renderBoard()
 }
 
-handlePegColor (function) {
-    prohibit clicking anywhere that isn't an active submenu
-    allows player to select which peg color to place in selected grid area.  Players can select any color except clear
+function renderBoard() {
+    computerCode = computerCode.map(() => {
+        return Math.floor(Math.random() * 6) + 1;
+    })
+    console.log(computerCode)
+    computerColumn1El.style.backgroundColor = pegColors[computerCode[0]];
+    computerColumn2El.style.backgroundColor = pegColors[computerCode[1]];
+    computerColumn3El.style.backgroundColor = pegColors[computerCode[2]];
+    computerColumn4El.style.backgroundColor = pegColors[computerCode[3]];
 }
 
-handleButton (function) {
-    prohibit clicking anywhere that isn't either button
-
-    if END TURN button
-    activates the next player row dependent on turn
-    deactivates prior row by pushing 'lock' to the end of the prior row array
-
-    if RESET button
-    Calls initialize function
-}
-
-(Reset) Initialize function that clears the board, clears a win or lose status if one exists, and creates new key in player and computer const objects
-
-(End Turn) Render function that creates new key in player and computer const objects every turn
-
-(computer) Function that checks PRESENCE of proper color pegs at the end of each turn
-
-(computer) Function that checks LOCATION of proper color pegs at the end of each turn
-
-Function the checks the number of objects playerGuessHistory < 10, and gives game over message if = 10
-
-Function that declares winner and calls winner message if computer returns four red pegs 
-
-Function that randomizes placement of computer pegs
 
 
+// console.log(boardRow)
 
-POSSIBLE FUNCTIONALITY IF TIME ALLOWS - set a difficulty level allowing the computer to place no peg (clear) in the code, and therefore allow the player to select clear as a peg color
+// 
