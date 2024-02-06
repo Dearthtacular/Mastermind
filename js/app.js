@@ -1,7 +1,7 @@
 /*----- constants -----*/
 
-const playPegColors = ['red', 'white', 'blue', 'green', 'yellow', 'black']
-const ePegColors = ['', 'red', 'white']
+const playPegColors = ['white', 'red', 'blue', 'green', 'yellow', 'black']
+const ePegColors = ['', 'black', 'white']
 
 /*----- app's state (variables) -----*/
 
@@ -24,16 +24,16 @@ let computerColumn1El = document.querySelector('#computerColumn1');
 let computerColumn2El = document.querySelector('#computerColumn2');
 let computerColumn3El = document.querySelector('#computerColumn3');
 let computerColumn4El = document.querySelector('#computerColumn4');
-let playerColumnr1c1El = document.querySelector('#playerColumnr1c1');
-let playerColumnr1c2El = document.querySelector('#playerColumnr1c2');
-let playerColumnr1c3El = document.querySelector('#playerColumnr1c3');
-let playerColumnr1c4El = document.querySelector('#playerColumnr1c4');
 
 /*----- event listeners -----*/
-document.querySelector('#playerColumnr1c1').addEventListener('click', colorPick1)
-document.querySelector('#playerColumnr1c2').addEventListener('click', colorPick2)
-document.querySelector('#playerColumnr1c3').addEventListener('click', colorPick3)
-document.querySelector('#playerColumnr1c4').addEventListener('click', colorPick4)
+
+const playerColumns = document.querySelectorAll('.guess')
+playerColumns.forEach(function (col, idx) {
+    // Looping through a collection of divs, this gives us access to the index of each div
+    // Adding an event listener to each div.  When the div is clicked on call upon selectColor,
+    // and pass in the click event object and the index
+    col.addEventListener('click', (event) => selectColor(event, idx))
+})
 document.querySelector('#end').addEventListener('click', endTurn)
 document.querySelector('#reset').addEventListener('click', reset)
 
@@ -47,30 +47,70 @@ function reset(event) {
 
 function endTurn(event) {
     if (!event.target.id.includes('end')) return
-    currentGuessRow.forEach((el, idx) => {
-        currentGuessRow[idx] = pColorIndexes[idx]
-    })
-    // evaluation time
 
-    // console.log(currentGuessRow)
-    // console.log(computerCode)
-
-    let eval = []
-    for (let i = 0; i < currentGuessRow.length; i++) {
-        if (currentGuessRow[i] === computerCode[i]) {
-            eval.push(1)
-        } else if
-            (currentGuessRow.includes(computerCode[i]) && currentGuessRow.indexOf(computerCode[i]) !== i) {
-            eval.push(0)
+    const guesses = []
+    const computerPositions = [...computerCode]
+    // const resultObj = {
+    //     index: 0,
+    //     isPartial: true,
+    //     isExact: false,
+    //     color: '4',
+    //     points: 1,
+    // }
+    pColorIndexes.forEach(function(colorInt, idx) {
+        // Create the result object
+        const resultObj = {}
+        resultObj.color = playPegColors[colorInt]
+        resultObj.isExact = computerPositions[idx] === colorInt
+        resultObj.isPartial = computerPositions[idx] !== colorInt && computerPositions.includes(colorInt)
+        // Update the computerPositions array removing instances of exact or partial matches
+        if (resultObj.isExact) {
+            computerPositions[idx] = null
         }
-    }
-    console.log(eval)
-    turn = turn += 1;
-    playerGuessHistory[turn] = currentGuessRow
-    // console.log(playerGuessHistory)
-
-
+        if (resultObj.isPartial) {
+            const compPartialIdx = computerPositions.findIndex(function(compInt){
+                return compInt === colorInt
+            })
+            computerPositions[compPartialIdx] = null
+        }
+        guesses.push(resultObj)
+    })
+    console.log(guesses)
+    // call upon renderComputerReport function
 }
+    // create new function called render score (or something) to update the computer report.  Ensure it is not within this function
+    // pass 'guesses' into the new function
+    // guesses is an array of objects with all of the necessary information to render the computer report
+    // function will loop through guesses and look at properties of each object and update UI accordingly 
+
+
+    // record two divs at the same position are exact matches
+
+    // currentGuessRow.forEach((el, idx) => {
+    //     currentGuessRow[idx] = pColorIndexes[idx]
+    // })
+
+    // let eval = new Set()
+    // let whitePeg = 0
+    // let blackPeg = 0
+    // for (let i = 0; i < currentGuessRow.length; i++) {
+    //     if (currentGuessRow[i] === computerCode[i]) {
+    //         blackPeg++
+    //         eval.add(currentGuessRow[i])
+    //     }
+    // }
+    // for (let i = 0; i < currentGuessRow.length; i++) {
+    //     if (currentGuessRow[i] !== computerCode[i] && computerCode.includes(currentGuessRow[i]) && !eval.has(currentGuessRow[i])) {
+    //         whitePeg++
+    //         eval.add(currentGuessRow[i]);
+    //     }
+    // }
+    // console.log('whitePeg ', whitePeg)
+    // console.log('blackPeg ', blackPeg)
+    // console.log(eval)
+    // turn = turn += 1;
+    // playerGuessHistory[turn] = currentGuessRow
+
 
 initialize()
 
@@ -82,42 +122,68 @@ function initialize() {
     render()
     //clear win or loss message
 }
-//console.log(playerGuessHistory)
+
 function render() {
-    renderBoard()
+    renderComputer()
 }
 
-function renderBoard() {
+function renderComputer() {
     computerCode = computerCode.map(() => {
-        return Math.floor(Math.random() * 5) + 1;
+        return Math.floor(Math.random() * 6);
     })
-    console.log(computerCode)
     computerColumn1El.style.backgroundColor = playPegColors[computerCode[0]];
     computerColumn2El.style.backgroundColor = playPegColors[computerCode[1]];
     computerColumn3El.style.backgroundColor = playPegColors[computerCode[2]];
     computerColumn4El.style.backgroundColor = playPegColors[computerCode[3]];
 }
 
-function colorPick1(event) {
-    if (!event.target.classList.contains('playerColumn')) return
-    pColorIndexes[0] = (pColorIndexes[0] + 1) % playPegColors.length;
-    playerColumnr1c1El.style.backgroundColor = playPegColors[pColorIndexes[0]];
+function selectColor(event, idx) {
+    pColorIndexes[idx] = pColorIndexes[idx] >= playPegColors.length - 1
+        ? 0
+        : pColorIndexes[idx] + 1
+    const selectedColorIndex = pColorIndexes[idx]
+    const selectedColorString = playPegColors[selectedColorIndex]
+    renderSelection(idx, selectedColorString)
 }
 
-function colorPick2(event) {
-    if (!event.target.classList.contains('playerColumn')) return
-    pColorIndexes[1] = (pColorIndexes[1] + 1) % playPegColors.length;
-    playerColumnr1c2El.style.backgroundColor = playPegColors[pColorIndexes[1]];
+function renderSelection(idx, selectedColorString) {
+    playerColumns[idx].style.backgroundColor = selectedColorString
 }
 
-function colorPick3(event) {
-    if (!event.target.classList.contains('playerColumn')) return
-    pColorIndexes[2] = (pColorIndexes[2] + 1) % playPegColors.length;
-    playerColumnr1c3El.style.backgroundColor = playPegColors[pColorIndexes[2]];
-}
+// function colorPick1(event) {
+//     if (!event.target.classList.contains('playerColumn')) return
+//     pColorIndexes[0] = (pColorIndexes[0] + 1) % playPegColors.length;
+//     playerColumnr1c1El.style.backgroundColor = playPegColors[pColorIndexes[0]];
+// }
 
-function colorPick4(event) {
-    if (!event.target.classList.contains('playerColumn')) return
-    pColorIndexes[3] = (pColorIndexes[3] + 1) % playPegColors.length;
-    playerColumnr1c4El.style.backgroundColor = playPegColors[pColorIndexes[3]];
-}
+// function colorPick2(event) {
+//     if (!event.target.classList.contains('playerColumn')) return
+//     pColorIndexes[1] = (pColorIndexes[1] + 1) % playPegColors.length;
+//     playerColumnr1c2El.style.backgroundColor = playPegColors[pColorIndexes[1]];
+// }
+
+// function colorPick3(event) {
+//     if (!event.target.classList.contains('playerColumn')) return
+//     pColorIndexes[2] = (pColorIndexes[2] + 1) % playPegColors.length;
+//     playerColumnr1c3El.style.backgroundColor = playPegColors[pColorIndexes[2]];
+// }
+
+// function colorPick4(event) {
+//     if (!event.target.classList.contains('playerColumn')) return
+//     pColorIndexes[3] = (pColorIndexes[3] + 1) % playPegColors.length;
+//     playerColumnr1c4El.style.backgroundColor = playPegColors[pColorIndexes[3]];
+// }
+
+/*----- event listeners -----*/
+
+// document.querySelector('#playerColumnr1c1').addEventListener('click', colorPick1)
+// document.querySelector('#playerColumnr1c2').addEventListener('click', colorPick2)
+// document.querySelector('#playerColumnr1c3').addEventListener('click', colorPick3)
+// document.querySelector('#playerColumnr1c4').addEventListener('click', colorPick4)
+
+// /*----- cached element references -----*/
+
+// let playerColumnr1c1El = document.querySelector('#playerColumnr1c1');
+// let playerColumnr1c2El = document.querySelector('#playerColumnr1c2');
+// let playerColumnr1c3El = document.querySelector('#playerColumnr1c3');
+// let playerColumnr1c4El = document.querySelector('#playerColumnr1c4');
