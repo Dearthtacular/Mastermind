@@ -68,19 +68,45 @@ function endTurn(event) {
         resultObj.isExact = computerPositions[idx] === colorInt
         resultObj.isPartial = computerPositions[idx] !== colorInt && computerPositions.includes(colorInt)
         // Update the computerPositions array removing instances of exact or partial matches
-        if (resultObj.isExact) {
-            computerPositions[idx] = null
-        }
+        pColorIndexes.forEach(function (resultObj) {
+            if (resultObj.isExact) {
+                computerPositions[idx] = null
+            }
+            // console.log(computerPositions)
+        })
         // NEED TO SEPARATE isExact from isPartial.  I'm guessing a nested function or two separate.  
+        pColorIndexes.forEach(function (resultObj) {
         if (resultObj.isPartial) {
             const compPartialIdx = computerPositions.findIndex(function (compInt) {
                 return compInt === colorInt
             })
             computerPositions[compPartialIdx] = null
         }
+        })
         guesses.push(resultObj)
     })
     console.log(guesses)
+
+    // pColorIndexes.forEach(function (colorInt, idx) {
+    //     // Create the result object
+    //     const resultObj = {}
+    //     resultObj.color = playPegColors[colorInt]
+    //     resultObj.isExact = computerPositions[idx] === colorInt
+    //     resultObj.isPartial = computerPositions[idx] !== colorInt && computerPositions.includes(colorInt)
+    //     // Update the computerPositions array removing instances of exact or partial matches
+    //     if (resultObj.isExact) {
+    //         computerPositions[idx] = null
+    //     }
+    //     // NEED TO SEPARATE isExact from isPartial.  I'm guessing a nested function or two separate.  
+    //     if (resultObj.isPartial) {
+    //         const compPartialIdx = computerPositions.findIndex(function (compInt) {
+    //             return compInt === colorInt
+    //         })
+    //         computerPositions[compPartialIdx] = null
+    //     }
+    //     guesses.push(resultObj)
+    // })
+    // console.log(guesses)
 
 
     // call upon renderReport function
@@ -108,16 +134,15 @@ function createReport(guesses) {
             computerReport.push('transparent');
         }
     }
-    // const shuffledReport = computerReport.slice().sort(() => Math.random() - 0.5)
-    console.log(computerReport)
-    renderReport(computerReport)
+    const shuffledReport = computerReport.slice().sort(() => Math.random() - 0.5)
+    // console.log(computerReport)
+    renderReport(shuffledReport)
 }
 
-function renderReport(computerReport) {
+function renderReport(shuffledReport) {
     const reportDots = document.querySelectorAll('.reports')
-    const shuffledDots = Array.from(reportDots).slice().sort(() => Math.random() - 0.5)
-    shuffledDots.forEach(function (quadrant, idx) {
-        shuffledDots[idx].style.backgroundColor = computerReport[idx]
+    reportDots.forEach(function (quadrant, idx) {
+        reportDots[idx].style.backgroundColor = shuffledReport[idx]
     })
     // console.log(reportDots)
     // console.log(shuffledDots)
