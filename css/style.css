@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: darkgray;
+}
+
 #boardContainer {
     /* update to 12 rows when code is working*/
     display: grid;
@@ -11,15 +15,16 @@
     grid-template-rows: 1fr, 1fr, 1fr, 1fr,;
     column-gap: 10px;
     row-gap: 10px;
-    height: 100vh;
+    /* height: 1000vpxh; */
     border: 2px solid black;
 }
 
 .row {
     display: flex;
+    align-items: center;
     flex-direction: row;
     height: 120px;
-    width: 600px;
+    width: 750px;
     border: 1px solid #ccc;
     padding: 10px;
     column-gap: 10px;
@@ -37,11 +42,29 @@
     row-gap: 10px;
 } */
 
+#codeRow {
+    display: none;
+}
+
+.blank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .playerColumn, .computerColumn {
     display: flex;
     width: 100px;
     height: 100px;
     border: 2px solid blue;
+}
+
+
+
+.blank {
+    display: flex;
+    width: 100px;
+    height: 100px;
 }
 
 .reports {
@@ -84,4 +107,30 @@
     grid-column-end: 1;
     grid-row-start: 2;
     grid-row-end: 2;
+}
+
+button {
+    height: 100px;
+    width: 300px;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#message {
+    font-size: 24px;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 5px;
 }

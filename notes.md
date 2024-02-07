@@ -86,3 +86,39 @@ Function that randomizes placement of computer pegs
 
 
 POSSIBLE FUNCTIONALITY IF TIME ALLOWS - set a difficulty level allowing the computer to place no peg (clear) in the code, and therefore allow the player to select clear as a peg color
+
+
+   // const guesses = []
+    // const computerPositions = [...computerCode] // temporary array where matched values can be nullified without modifying the original array
+    // // const resultObj = {
+    // //     index: 0,
+    // //     isPartial: true,
+    // //     isExact: false,
+    // //     color: '4',
+    // //     points: 1,
+    // // }
+
+    // pColorIndexes.forEach(function (colorInt, idx) {
+    //     // Create the result object
+    //     const resultObj = {}
+    //     resultObj.color = playPegColors[colorInt]
+    //     resultObj.isExact = computerPositions[idx] === colorInt
+    //     resultObj.isPartial = computerPositions[idx] !== colorInt && computerPositions.includes(colorInt)
+    //     // Update the computerPositions array removing instances of exact or partial matches
+    //     if (resultObj.isExact) {
+    //         computerPositions[idx] = null
+
+    //     }
+    //     // NEED TO SEPARATE isExact from isPartial.  I'm guessing a nested function or two separate.  
+    //     if (resultObj.isPartial) {
+    //         const compPartialIdx = computerPositions.findIndex(function (compInt) {
+    //             return compInt === colorInt
+    //         })
+    //         computerPositions[compPartialIdx] = null
+    //     }
+    //     guesses.push(resultObj)
+    //     console.log(computerPositions)
+    // })
+    // console.log(guesses)
+
+    // call upon renderReport function
