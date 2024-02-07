@@ -141,7 +141,8 @@ function renderNewRow() {
     // const dotsWithin
     cloneRow.insertAdjacentElement('afterend', clonedRow);
     // const h2TurnMarker = cloneRow.querySelector('h2');
-    h2TurnMarker.textContent = `Turn ${[turn]}`;
+    h2TurnMarker.innerHTML = `Turn <br> ${[turn]}`;
+    
 }
 
 function populatePlayerHistory() {
