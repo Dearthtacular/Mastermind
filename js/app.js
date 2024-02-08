@@ -55,18 +55,17 @@ function reset() {
 
 function endTurn(event) {
     if (!event.target.id.includes('end')) return
-    // if (pColorIndexes.includes(null)) return
+    if (pColorIndexes.includes(null)) return
 
     const guesses = []
-
     const computerPositionsExact = [...computerCode]
     const playerPositionsExact = [...pColorIndexes]
 
     playerPositionsExact.forEach(function (colorInt, idx) {
-
         const resultObj = {}
         resultObj.color = playPegColors[colorInt]
         resultObj.isExact = computerPositionsExact[idx] === colorInt
+        
         if (resultObj.isExact) {
             computerPositionsExact[idx] = null
             playerPositionsExact[idx] = null
@@ -81,6 +80,7 @@ function endTurn(event) {
         const resultObj = {}
         resultObj.color = playPegColors[colorInt]
         resultObj.isPartial = computerPositionsPartial[idx] !== colorInt && computerPositionsPartial.includes(colorInt)
+        
         if (resultObj.isPartial) {
             const compPartialIdx = computerPositionsPartial.findIndex(function (compInt) {
                 return compInt === colorInt
