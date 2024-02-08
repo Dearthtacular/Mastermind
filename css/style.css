@@ -43,7 +43,6 @@
 
 * {
     box-sizing: border-box;
-    /* font-family: Arial, Helvetica, sans-serif; */
     font-family: Digitalis;
 }
 
@@ -93,16 +92,13 @@ h1, h2 {
 }
 
 #boardContainer {
-    /* update to 12 rows when code is working*/
+
     display: grid;
     justify-content: center;
     border: 1px solid #ccc;
     padding: 10px;
     width: 90vw;
     max-width: 750px;
-    /* grid-template-columns: 1fr, 1fr, 1fr, 1fr, 1fr; */
-    /* grid-template-rows: 1fr, 1fr, 1fr, 1fr,; */
-    /* column-gap: 10px; */
     row-gap: 10px;
     border: none;
 }
@@ -111,15 +107,12 @@ h1, h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* flex-direction: row; */
     height: 15vw;
-    /* width: 80vw; */
     max-height: 120px;
     max-width: 750px;
     border: 1px solid #ccc;
     padding: 10px;
     column-gap: 10px;
-    /* row-gap: 10px; */
     border: none;
 }
 
@@ -257,7 +250,3 @@ button {
     background-color: #333;
     border-radius: 5px;
 }
-
-/* h1 {
-    color: ;
-} */
