@@ -6,6 +6,30 @@
     
 }
 
+@keyframes turnPulse {
+    0% {
+        transform: scale(1); /* Initial size */
+    }
+    50% {
+        transform: scale(1.15); /* Slightly larger size */
+    }
+    100% {
+        transform: scale(1); /* Return to initial size */
+    }
+}
+
+@keyframes colorPulse {
+    0% {
+        border: 2px dotted rgba(13, 213, 166, .05);
+    }
+    50% {
+        border: 2px dotted rgba(13, 213, 166, .35);
+    }
+    100% {
+        border: 2px dotted rgba(13, 213, 166, .05);
+    }
+}
+
 * {
     box-sizing: border-box;
     /* font-family: Arial, Helvetica, sans-serif; */
@@ -53,6 +77,10 @@ h1, h2 {
     text-align: center;
 }
 
+#row0 h2, #codeRow {
+    animation: turnPulse 3s infinite;
+}
+
 #boardContainer {
     /* update to 12 rows when code is working*/
     display: grid;
@@ -65,6 +93,7 @@ h1, h2 {
     /* grid-template-rows: 1fr, 1fr, 1fr, 1fr,; */
     /* column-gap: 10px; */
     row-gap: 10px;
+    border: none;
 }
 
 .row {
@@ -80,6 +109,7 @@ h1, h2 {
     padding: 10px;
     column-gap: 10px;
     /* row-gap: 10px; */
+    border: none;
 }
 
 #codeRow {
@@ -98,19 +128,24 @@ h1, h2 {
     height: 10vw;
     max-width: 100px;
     max-height: 100px;
-    border: 2px solid blue;
-    margin: 5px
+    margin: 5px;
+    border: #00ffffff;
+    border-radius: 1vw;
+}
+
+#row0 .guess {
+    animation: colorPulse 3s infinite;
 }
 
 .blank {
     display: flex;
-    width: 100px;
+    width: 60px;
     height: 100px;
 }
 
 .reports {
-    height: 30px;
-    width: 30px;
+    height: 50%;
+    width: 50%;
     border-radius: 50%;
 }
 
@@ -150,13 +185,37 @@ h1, h2 {
     grid-row-end: 2;
 }
 
-#end {
-    height: 10vw;
+button {
+    height: 11vw;
     max-height: 50px;
     width: 20vw;
     max-width: 150px;
-    background-color: #00A67E;
-    border-radius: 2vw;
+    font-size: larger;
+    border-radius: 15px;
+}
+
+#end { 
+    color: #0dd5a6;
+    background-color: #041E62;
+    border-color: #0dd5a6;
+}
+
+#end:hover {
+    color: #041E62;
+    background-color: #0dd5a6;
+    border-style: none;
+}
+
+#reset { 
+    color: #BC1643;
+    background-color: #041E62;
+    border-color: #BC1643;
+}
+
+#reset:hover {
+    color: #041E62;
+    background-color: #BC1643;
+    border-style: none;
 }
 
 #overlay {
@@ -178,4 +237,8 @@ h1, h2 {
     padding: 20px;
     background-color: #333;
     border-radius: 5px;
+}
+
+h1 {
+    color: ;
 }

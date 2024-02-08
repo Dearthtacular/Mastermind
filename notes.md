@@ -122,3 +122,36 @@ POSSIBLE FUNCTIONALITY IF TIME ALLOWS - set a difficulty level allowing the comp
     // console.log(guesses)
 
     // call upon renderReport function
+
+    ==========================================
+
+        // const computerPositionsExact = [...computerCode]
+
+    // pColorIndexes.forEach(function (colorInt, idx) {
+
+    //     const resultObj = {}
+    //     resultObj.color = playPegColors[colorInt]
+    //     resultObj.isExact = computerPositionsExact[idx] === colorInt
+    //     if (resultObj.isExact) {
+    //         computerPositionsExact[idx] = null
+
+    //     }
+    //     guesses.push(resultObj)
+    //     console.log(computerPositionsExact)
+    // })
+
+    // const computerPositionsPartial = [...computerPositionsExact]
+
+    // pColorIndexes.forEach(function (colorInt, idx) {
+    //     const resultObj = {}
+    //     resultObj.color = playPegColors[colorInt]
+    //     resultObj.isPartial = computerPositionsPartial[idx] !== colorInt && computerPositionsPartial.includes(colorInt)
+    //     if (resultObj.isPartial) {
+    //         const compPartialIdx = computerPositionsPartial.findIndex(function (compInt) {
+    //             return compInt === colorInt
+    //         })
+    //         computerPositionsPartial[compPartialIdx] = null
+    //     }
+    //     guesses.push(resultObj)
+    //     console.log(computerPositionsPartial)
+    // })

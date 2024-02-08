@@ -1,6 +1,6 @@
 /*----- constants -----*/
 
-const playPegColors = ['white', 'red', 'blue', 'green', 'yellow', 'black']
+const playPegColors = ['darkorchid', 'firebrick', 'deepskyblue', 'green', 'gold', 'dimgrey']
 const ePegColors = ['', 'white', 'black']
 
 /*----- app's state (variables) -----*/
@@ -19,7 +19,7 @@ let responseHistory = {} // an object that holds arrays of the history of guess 
 
 let turn = 0 //Will determine current player row / prohibits changing guesses from prior turns / will end game if > 10
 
-console.log(pColorIndexes)
+// console.log(pColorIndexes)
 
 /*----- cached element references -----*/
 let computerColumn1El = document.querySelector('#computerColumn1');
@@ -61,7 +61,7 @@ function reset() {
         col.removeAttribute('style');
     });
     turn = 1;
-    h2TurnMarker.textContent = `Turn ${[turn]}`;
+    h2TurnMarker.innerHTML = `Turn<br>${[turn]}`;
     codeRow.style.display = 'none'
     hideMessage()
     const clonedRows = document.querySelectorAll('.cloned')
@@ -78,23 +78,26 @@ function endTurn(event) {
     const guesses = []
 
     const computerPositionsExact = [...computerCode]
+    const playerPositionsExact = [...pColorIndexes]
 
-    pColorIndexes.forEach(function (colorInt, idx) {
+    playerPositionsExact.forEach(function (colorInt, idx) {
 
         const resultObj = {}
         resultObj.color = playPegColors[colorInt]
         resultObj.isExact = computerPositionsExact[idx] === colorInt
         if (resultObj.isExact) {
-            computerPositionsExact[idx] = null;
-
+            computerPositionsExact[idx] = 'exclude'
+            playerPositionsExact[idx] = 'exclude'
         }
         guesses.push(resultObj)
         // console.log(computerPositionsExact)
+        // console.log(playerPositionsExact)
     })
 
     const computerPositionsPartial = [...computerPositionsExact]
+    const playerPositionsPartial = [...playerPositionsExact]
 
-    pColorIndexes.forEach(function (colorInt, idx) {
+    playerPositionsPartial.forEach(function (colorInt, idx) {
         const resultObj = {}
         resultObj.color = playPegColors[colorInt]
         resultObj.isPartial = computerPositionsPartial[idx] !== colorInt && computerPositionsPartial.includes(colorInt)
@@ -102,13 +105,16 @@ function endTurn(event) {
             const compPartialIdx = computerPositionsPartial.findIndex(function (compInt) {
                 return compInt === colorInt
             })
-            computerPositionsPartial[compPartialIdx] = null
+            computerPositionsPartial[compPartialIdx] = 'exclude'
         }
         guesses.push(resultObj)
+        // console.log(computerPositionsPartial)
+        // console.log(playerPositionsPartial)
     })
 
     pColorIndexes = [null, null, null, null]
 
+    // const playPegColors = ['white', 'red', 'blue', 'green', 'yellow', 'black']
 
 
     console.log(guesses)
@@ -147,7 +153,7 @@ function renderNewRow() {
 
 function populatePlayerHistory() {
     playerGuessHistory[turn] = pColorIndexes
-    console.log(playerGuessHistory)
+    // console.log(playerGuessHistory)
 }
 
 function gameWin(guesses) {
@@ -172,16 +178,16 @@ function createReport(guesses) {
     computerReport = []
     guesses.forEach(function (obj) {
         if (obj.isExact) {
-            computerReport.push('black')
+            computerReport.push('#ffffff')
         }
         if (obj.isPartial) {
-            computerReport.push('white')
+            computerReport.push('#333333')
         }
     })
     if (computerReport.length < 4) {
-        const transparentCount = 4 - computerReport.length
-        for (let i = 0; i < transparentCount; i++) {
-            computerReport.push('transparent');
+        const nullCount = 4 - computerReport.length
+        for (let i = 0; i < nullCount; i++) {
+            computerReport.push(null);
         }
     }
     const shuffledReport = computerReport.slice().sort(() => Math.random() - 0.5)
