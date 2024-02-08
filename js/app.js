@@ -1,6 +1,6 @@
 /*----- constants -----*/
 
-const playPegColors = ['darkorchid', 'firebrick', 'deepskyblue', 'green', 'gold', 'dimgrey']
+const playPegColors = ['lightpink', 'firebrick', 'deepskyblue', 'olivedrab', 'gold', 'dimgrey']
 const ePegColors = ['', 'white', 'black']
 
 /*----- app's state (variables) -----*/
@@ -74,6 +74,7 @@ function reset() {
 
 function endTurn(event) {
     if (!event.target.id.includes('end')) return
+    if (pColorIndexes.includes(null)) return
 
     const guesses = []
 
@@ -86,8 +87,8 @@ function endTurn(event) {
         resultObj.color = playPegColors[colorInt]
         resultObj.isExact = computerPositionsExact[idx] === colorInt
         if (resultObj.isExact) {
-            computerPositionsExact[idx] = 'exclude'
-            playerPositionsExact[idx] = 'exclude'
+            computerPositionsExact[idx] = null
+            playerPositionsExact[idx] = null
         }
         guesses.push(resultObj)
         // console.log(computerPositionsExact)
@@ -105,7 +106,7 @@ function endTurn(event) {
             const compPartialIdx = computerPositionsPartial.findIndex(function (compInt) {
                 return compInt === colorInt
             })
-            computerPositionsPartial[compPartialIdx] = 'exclude'
+            computerPositionsPartial[compPartialIdx] = null
         }
         guesses.push(resultObj)
         // console.log(computerPositionsPartial)
@@ -178,10 +179,10 @@ function createReport(guesses) {
     computerReport = []
     guesses.forEach(function (obj) {
         if (obj.isExact) {
-            computerReport.push('#ffffff')
+            computerReport.push('#2E8B57')
         }
         if (obj.isPartial) {
-            computerReport.push('#333333')
+            computerReport.push('#A0522D')
         }
     })
     if (computerReport.length < 4) {
@@ -240,7 +241,7 @@ function renderSelection(idx, selectedColorString) {
 
 function showMessage(msg) {
     overlay.style.display = 'flex';
-    message.innerHTML = `${msg}<br><br>(Click to try again)`;
+    message.innerHTML = `${msg}<br><br>(Click to play again)`;
 };
 
 function hideMessage() {
