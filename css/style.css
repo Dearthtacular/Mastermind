@@ -92,7 +92,6 @@ h1, h2 {
 }
 
 #boardContainer {
-
     display: grid;
     justify-content: center;
     border: 1px solid #ccc;
@@ -162,7 +161,6 @@ h1, h2 {
 }
 
 #top-left {
-
     animation: placement 1s;
     grid-column-start: 1;
     grid-column-end: 1;
@@ -171,7 +169,6 @@ h1, h2 {
 }
 
 #top-right {
-
     animation: placement 1s;
     grid-column-start: 2;
     grid-column-end: 2;
@@ -180,7 +177,6 @@ h1, h2 {
 }
 
 #bottom-right {
-
     animation: placement 1s;
     grid-column-start: 2;
     grid-column-end: 2;
@@ -189,7 +185,6 @@ h1, h2 {
 }
 
 #bottom-left {
-
     animation: placement 1s;
     grid-column-start: 1;
     grid-column-end: 1;
