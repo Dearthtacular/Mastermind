@@ -63,7 +63,7 @@ The player selected three of the four colors chosen in turn one and added one mo
 
 and so on...
 
-Upon winning the game, the code created by the computer is revealed.
+Upon completing the game (win or lose), the code created by the computer is revealed.
 
 ![win screen](images/win.png)
 
