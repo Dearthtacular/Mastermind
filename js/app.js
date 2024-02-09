@@ -28,7 +28,7 @@ const message = document.querySelector('#message')
 playerColumns.forEach(function (col, idx) {
     col.addEventListener('click', (event) => selectColor(event, idx))
 })
-document.querySelector('#end').addEventListener('click', endTurn)
+document.querySelector('#guess').addEventListener('click', guess)
 document.querySelector('#reset').addEventListener('click', reset)
 document.querySelector('#overlay').addEventListener('click', reset)
 
@@ -53,8 +53,8 @@ function reset() {
     initialize()
 }
 
-function endTurn(event) {
-    if (!event.target.id.includes('end')) return
+function guess(event) {
+    if (!event.target.id.includes('guess')) return
     if (pColorIndexes.includes(null)) return
 
     const guesses = []
