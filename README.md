@@ -1,4 +1,4 @@
-# Mastermind Lite
+# [Mastermind Lite](https://dearthtacular.github.io/Mastermind-Lite/)
 
 Thank you for selecting Mastermind Lite for all of your entertainment needs.  Mastermind Lite is playable in modern browsers and was created using JavaScript, HTML, and CSS.
 
