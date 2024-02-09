@@ -242,7 +242,7 @@ button {
 }
 
 #info {
-    animation: infoPulse 1s 1s;
+    animation: infoPulse 1s 2s;
     animation-iteration-count: 3;
     position: fixed;
     bottom: 0;
