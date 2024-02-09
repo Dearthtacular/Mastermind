@@ -40,7 +40,7 @@ Orange: The player selected a color that appears somewhere in the code maker's c
 No dot / dot absent:  The player selected a color that is not present in the code maker's code.
 <br>
 
->__Note__: The report dot locations are not fixed relative to the vertical locations guessed by the player.  In other words, if a guess yields a green dot in the __upper left__ quadrant of the reporting field, an _identical_ guess may yield a green dot in the __lower right__ quadrant of the reporting field.  All dot locations are randomized each turn, but the same information is conveyed.
+>__Note__: The report dot locations are not fixed relative to the vertical locations guessed by the player.  In other words, if a guess yields a green dot in the __upper left__ quadrant of the reporting field, an _identical_ guess may yield a green dot in the __lower right__ quadrant of the reporting field.  All dot locations are randomized each turn.  The code maker is saying, "One color is in the correct location, but I'm not saying which one or where."
 
 ## Examples
 
