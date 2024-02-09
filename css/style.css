@@ -41,6 +41,22 @@
     }
 }
 
+@keyframes infoPulse {
+    0% {
+        background-color: rgba(255, 255, 255, 0);
+        transform: scale(1)
+    }
+    50% {
+        background-color: rgba(255, 255, 255, 1);
+        color: rgba(4, 30, 98, 1);
+        transform: scale(1.15)
+    }
+    100% {
+        background-color: rgba(255, 255, 255, 0);
+        transform: scale(1)
+    }
+}
+
 * {
     box-sizing: border-box;
     font-family: Digitalis;
@@ -201,13 +217,13 @@ button {
     border-radius: 15px;
 }
 
-#end { 
+#guess { 
     color: #0dd5a6;
-    background-color: #041E62;
+    background-color: rgba(255, 255, 255, 0);
     border-color: #0dd5a6;
 }
 
-#end:hover {
+#guess:hover {
     color: #041E62;
     background-color: #0dd5a6;
     border-style: none;
@@ -215,7 +231,7 @@ button {
 
 #reset { 
     color: #BC1643;
-    background-color: #041E62;
+    background-color: rgba(255, 255, 255, 0);
     border-color: #BC1643;
 }
 
@@ -226,19 +242,27 @@ button {
 }
 
 #info {
+    animation: infoPulse 1s 1s;
+    animation-iteration-count: 3;
     position: fixed;
     bottom: 0;
     left: 0;
     margin: 15px;
-    color: #ffffff;
-    background-color: #041E62;
+    background-color: rgba(255, 255, 255, 0);
     border-color: #ffffff;
+    color: #ffffff;
+    font-size: 18px;
 }
 
-#infoText {
-    font-family: Digitalis;
+#info:hover {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 15px;
     font-size: 18px;
-    color: #ffffff;
+    background-color: rgba(255, 255, 255, 1);
+    border-color: #ffffff;
+    color: #000E39;
 }
 
 #overlay {
